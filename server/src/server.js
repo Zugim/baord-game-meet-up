@@ -20,7 +20,7 @@ if (ENVIRONMENT === "development") {
   //app.use("/", express.static(path.join(__dirname, "../../client/dist")));
   app.use(
     cors({
-      origin: "https://board-game-meet-up.onrender.com",
+      origin: "https://board-game-meet-up-front-end.vercel.app/",
       credentials: true,
     })
   );
