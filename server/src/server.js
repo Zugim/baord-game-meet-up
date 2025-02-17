@@ -9,16 +9,16 @@ const auth = require("./routes/auth");
 ENVIRONMENT = process.env.NODE_ENV || "development";
 console.log("ENVIRONMENT", ENVIRONMENT);
 
-// if (ENVIRONMENT === "development") {
-//   app.use(
-//     cors({
-//       origin: "http://localhost:5173",
-//       credentials: true,
-//     })
-//   );
-// } else {
-//   app.use("/", express.static(path.join(__dirname, "../../client/dist")));
-// }
+if (ENVIRONMENT === "development") {
+  app.use(
+    cors({
+      origin: "http://localhost:5173",
+      credentials: true,
+    })
+  );
+} else {
+  app.use("/", express.static(path.join(__dirname, "../../client/dist")));
+}
 // const allowedOrigins = ["http://localhost:5173"];
 // app.use(
 //   cors({
@@ -32,18 +32,18 @@ console.log("ENVIRONMENT", ENVIRONMENT);
 //   })
 // );
 
-const allowlist = ["http://localhost:5173", "http://example2.com"];
-const corsOptionsDelegate = function (req, callback) {
-  let corsOptions;
-  if (allowlist.indexOf(req.header("Origin")) !== -1) {
-    corsOptions = { origin: true, credentials: true }; // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false, credentials: true }; // disable CORS for this request
-  }
-  callback(null, corsOptions); // callback expects two parameters: error and options
-};
+// const allowlist = ["http://localhost:5173", "http://example2.com"];
+// const corsOptionsDelegate = function (req, callback) {
+//   let corsOptions;
+//   if (allowlist.indexOf(req.header("Origin")) !== -1) {
+//     corsOptions = { origin: true, credentials: true }; // reflect (enable) the requested origin in the CORS response
+//   } else {
+//     corsOptions = { origin: false, credentials: true }; // disable CORS for this request
+//   }
+//   callback(null, corsOptions); // callback expects two parameters: error and options
+// };
 
-app.use(cors(corsOptionsDelegate));
+// app.use(cors(corsOptionsDelegate));
 
 app.use(express.json());
 

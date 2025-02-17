@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { getAllUserData } from "./helpers/fetchHelpers";
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter as Router, Routes, Route } from "react-router";
 
 // helpers
-//import { checkAuth } from "./helpers/fetchHelpers";
+import { checkAuth } from "./helpers/fetchHelpers";
 
 //components
 import HomePage from "./components/HomePage";
@@ -28,15 +28,15 @@ function App() {
 
   return (
     <>
-      {/*<h1>Board Game Meet Up App</h1>*/}
-      <BrowserRouter>
+      <h1>Board Game Meet Up App</h1>
+      <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Routes>
-      </BrowserRouter>
-      {/*<button onClick={checkAuth}>Check Auth</button>*/}
+      </Router>
+      <button onClick={checkAuth}>Check Auth</button>
     </>
   );
 }
