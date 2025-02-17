@@ -1,2 +1,45 @@
 #root {
+  min-height: 100dvh;
+  background-color: var(--light-green);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  background-color: var(--white);
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  background-color: var(--white);
+  border-radius: 0.5rem;
+  box-shadow: var(--card-shadow);
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 100vh;
+  height: 50px;
+  margin-top: 1.5rem;
+  background-color: var(--dark-green);
+}
+
+.logo {
+  margin-bottom: -18px;
+  font: var(--logo-font);
+  color: var(--dark-green);
+}
+
+.auth-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
 }

@@ -1,2 +1,112 @@
 :root {
+  /* fonts */
+  --logo-font: 600 2rem "Borel", serif;
+  --header-font: oblique 900 2.5rem "Lato", serif;
+  --sub-header-font: 600 1.8rem "Hind Vadodara", serif;
+  --body-font: 350 1.1rem / 1.5 "Frank Ruhl Libre", serif;
+  --button-font: 500 0.95rem "Hind Vadodara", serif;
+  --label-font: 600 1rem "Hind Vadodara", serif;
+  --input-font: 400 0.95rem "Hind Vadodara", serif;
+
+  /* colors */
+  --white: #f2f2f2;
+  --black: #333a3f;
+  --light-green: #e3eeae;
+  --dark-green: #27667b;
+  --dark-blue: #143d60;
+  --light-blue: #bae4ea;
+  --grey-blue: #728aa0;
+  --light-grey: #bbc0c6;
+
+  /* shadows */
+  --focus-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  --card-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  color: var(--black);
+}
+
+h1 {
+  margin-bottom: 0.4rem;
+  font: var(--header-font);
+  color: var(--dark-blue);
+}
+
+h2 {
+  margin-bottom: 0.6rem;
+  font: var(--sub-header-font);
+  color: var(--grey-blue);
+}
+
+p {
+  margin-bottom: 0.8rem;
+  font: var(--body-font);
+}
+
+::placeholder {
+  color: var(--light-grey);
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  padding: 0.4rem 1rem;
+  background-color: var(--dark-blue);
+  border: 2px solid var(--dark-blue);
+  border-radius: 100vh;
+  font: var(--button-font);
+  color: var(--white);
+  transition: background-color 0.1s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus {
+  background-color: var(--light-blue);
+  color: var(--dark-blue);
+}
+
+button:focus {
+  outline: none;
+  box-shadow: var(--focus-shadow);
+}
+
+.btn-link {
+  text-decoration: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+}
+
+label {
+  margin-bottom: 0.1rem;
+  font: var(--label-font);
+}
+
+input {
+  height: 35px;
+  margin-bottom: 0.5rem;
+  padding-left: 0.8rem;
+  border: 2px solid var(--dark-green);
+  border-radius: 0.4rem;
+  font: var(--input-font);
+}
+
+input + button {
+  margin-top: 1rem;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: var(--focus-shadow);
 }

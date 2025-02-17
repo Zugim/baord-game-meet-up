@@ -1,13 +1,8 @@
 /* Helper function for fetching data */
 
-// checks if in development or production
-const URL = import.meta.env.VITE_BASE_URL;
-// const URL =
-//   import.meta.env.MODE === "development" ? "http://localhost:8080" : "";
-
-console.log("URL", URL);
-
 console.log("ENVIRONMENT:", import.meta.env.MODE);
+
+const URL = import.meta.env.VITE_BASE_URL;
 console.log("URL:", URL);
 
 // fetches related to users
@@ -31,7 +26,7 @@ export const login = async (formData: FormData) => {
   });
   const result = await response.json();
   console.log(result.message, result.user);
-  return result;
+  return result.user;
 };
 
 //registers the user
@@ -51,6 +46,7 @@ export const register = async (formData: FormData) => {
   return result;
 };
 
+// logs out the user
 export const logout = async () => {
   const response = await fetch(`${URL}/api/auth/logout`, {
     method: "DELETE",
@@ -68,5 +64,5 @@ export const checkAuth = async () => {
   });
   const result = await response.json();
   console.log(result.message, result.user);
-  return result;
+  return result.user;
 };

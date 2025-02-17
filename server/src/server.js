@@ -8,7 +8,7 @@ const auth = require("./routes/auth");
 
 // checks if in development or production
 ENVIRONMENT = process.env.NODE_ENV || "development";
-console.log("ENVIRONMENT", ENVIRONMENT);
+console.log("ENVIRONMENT:", ENVIRONMENT);
 
 if (ENVIRONMENT === "development") {
   app.use(
