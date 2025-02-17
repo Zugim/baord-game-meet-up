@@ -26,34 +26,6 @@ if (ENVIRONMENT === "development") {
     })
   );
 }
-// const allowedOrigins = ["http://localhost:5173"];
-// app.use(
-//   cors({
-//     origin: function (origin, callback) {
-//       if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//   })
-// );
-
-// const allowlist = [
-//   "http://localhost:5173",
-//   "https://board-game-meet-up.onrender.com",
-// ];
-// const corsOptionsDelegate = function (req, callback) {
-//   let corsOptions;
-//   if (allowlist.indexOf(req.header("Origin")) !== -1) {
-//     corsOptions = { origin: true, credentials: true }; // reflect (enable) the requested origin in the CORS response
-//   } else {
-//     corsOptions = { origin: false, credentials: true }; // disable CORS for this request
-//   }
-//   callback(null, corsOptions); // callback expects two parameters: error and options
-// };
-
-// app.use(cors(corsOptionsDelegate));
 
 app.use(express.json());
 
