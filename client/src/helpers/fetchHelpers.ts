@@ -1,9 +1,9 @@
 /* Helper function for fetching data */
 
 // checks if in development or production
-// const URL = import.meta.env.VITE_BASE_URL;
-const URL =
-  import.meta.env.MODE === "development" ? "http://localhost:8080" : "";
+const URL = import.meta.env.VITE_BASE_URL;
+// const URL =
+//   import.meta.env.MODE === "development" ? "http://localhost:8080" : "";
 
 console.log("URL", URL);
 
