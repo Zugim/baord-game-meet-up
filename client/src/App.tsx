@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router";
 import { checkAuth } from "./helpers/fetchHelpers";
 
 //components
+import HomePage from "./components/HomePage";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 
@@ -29,6 +30,7 @@ function App() {
     <>
       <h1>Board Game Meet Up App</h1>
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
