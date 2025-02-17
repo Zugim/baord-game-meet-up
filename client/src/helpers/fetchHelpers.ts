@@ -20,8 +20,6 @@ export const getAllUserData = async () => {
 // fetches realted to auth
 // logs the user in
 export const login = async (formData: FormData) => {
-  console.log("LOGGING IN");
-
   const response = await fetch(`${URL}/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -38,8 +36,6 @@ export const login = async (formData: FormData) => {
 
 //registers the user
 export const register = async (formData: FormData) => {
-  console.log("REGISTERING");
-
   const response = await fetch(`${URL}/api/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -48,6 +44,16 @@ export const register = async (formData: FormData) => {
       password: formData.get("password"),
       city: formData.get("city"),
     }),
+    credentials: "include",
+  });
+  const result = await response.json();
+  console.log(result.message, result.user);
+  return result;
+};
+
+export const logout = async () => {
+  const response = await fetch(`${URL}/api/auth/logout`, {
+    method: "DELETE",
     credentials: "include",
   });
   const result = await response.json();

@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-app.set("trust proxy", 1);
+app.set("trust proxy", 1); // to get cookies to work with react
 const knex = require("./knex");
 const cors = require("cors");
 const path = require("path");

@@ -19,6 +19,7 @@ const sessionOptions = {
     maxAge: 1000 * 60 * 60,
     secure: ENVIRONMENT === "development" ? false : true,
     httpOnly: true,
+    partitioned: true,
   },
   resave: false,
   saveUninitialized: false,

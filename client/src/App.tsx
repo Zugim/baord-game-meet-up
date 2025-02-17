@@ -3,7 +3,7 @@ import { getAllUserData } from "./helpers/fetchHelpers";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 
 // helpers
-import { checkAuth } from "./helpers/fetchHelpers";
+import { logout, checkAuth } from "./helpers/fetchHelpers";
 
 //components
 import HomePage from "./components/HomePage";
@@ -37,6 +37,7 @@ function App() {
         </Routes>
       </Router>
       <button onClick={checkAuth}>Check Auth</button>
+      <button onClick={logout}>Logout</button>
     </>
   );
 }
