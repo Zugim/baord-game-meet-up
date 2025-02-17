@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+app.set("trust proxy", 1);
 const knex = require("./knex");
 const cors = require("cors");
 const path = require("path");
@@ -20,7 +21,7 @@ if (ENVIRONMENT === "development") {
   //app.use("/", express.static(path.join(__dirname, "../../client/dist")));
   app.use(
     cors({
-      origin: "https://board-game-meet-up-front-end.vercel.app/",
+      origin: "https://board-game-meet-up.onrender.com",
       credentials: true,
     })
   );
