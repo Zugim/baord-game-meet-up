@@ -1,0 +1,20 @@
+header {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  background-color: var(--white);
+}
+
+.logo {
+  margin-bottom: -18px;
+  font: var(--logo-font);
+  color: var(--dark-green);
+}
+
+.auth-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}

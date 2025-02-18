@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router";
+import { Routes, Route } from "react-router";
 
 // helpers
 import {
   getAllUserData,
   getAllMeetingData,
   getAllBoardGameData,
-  logout,
   checkAuth,
 } from "./helpers/fetchHelpers";
 
@@ -23,8 +22,6 @@ import { User, Meeting, BoardGame, CurrentUser } from "../globalTypes";
 import "./App.css";
 
 function App() {
-  const navigate = useNavigate();
-
   const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
   const [userData, setUserData] = useState<User[] | null>(null);
   const [meetingData, setMeetingData] = useState<Meeting[] | null>(null);
@@ -54,52 +51,12 @@ function App() {
 
   return (
     <>
-      <header>
-        <Link to="/" className="btn-link">
-          <div className="logo">bgmu</div>
-        </Link>
-        <div className="auth-controls">
-          {currentUser?.status === "authed" ? (
-            <>
-              <Link to="/User" className="btn-link">
-                <button>Profile</button>
-              </Link>
-              <button
-                onClick={() => {
-                  logout();
-                  setCurrentUser({ status: "unauthed" });
-                  navigate("/");
-                }}
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="btn-link">
-                <button>Login</button>
-              </Link>
-              <Link to="/register" className="btn-link">
-                <button>Register</button>
-              </Link>
-            </>
-          )}
-        </div>
-      </header>
-      <main>
-        <Routes>
-          <Route path="/" element={<HomePage meetingData={meetingData} />} />
-          <Route
-            path="/login"
-            element={<LoginPage setCurrentUser={setCurrentUser} />}
-          />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/user" element={<UserPage />} />
-        </Routes>
-      </main>
-      <footer>
-        <button onClick={checkAuth}>Check Auth &lt;DEV&gt;</button>
-      </footer>
+      <Routes>
+        <Route path="/" element={<HomePage meetingData={meetingData} />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/user" element={<UserPage />} />
+      </Routes>
     </>
   );
 }
