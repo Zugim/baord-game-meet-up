@@ -30,10 +30,6 @@ export default function UserPage() {
     }
   }, [currentUser]);
 
-  useEffect(() => {
-    console.log("USER COLLECTION", collection);
-  }, [collection]);
-
   // makes page private
   useEffect(() => {
     if (currentUser?.status === "unauthed") {

@@ -32,7 +32,7 @@ app.use(express.json());
 // routes
 app.use("/api/auth", auth);
 
-// test endpoints
+// gets all users
 app.get("/api/user", async (req, res) => {
   try {
     const users = await knex
@@ -47,6 +47,7 @@ app.get("/api/user", async (req, res) => {
   }
 });
 
+// gets all meetings
 app.get("/api/meeting", async (req, res) => {
   try {
     const meetings = await knex
@@ -61,6 +62,50 @@ app.get("/api/meeting", async (req, res) => {
   }
 });
 
+// gets a meeting by id
+app.get("/api/meeting/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const [meeting] = await knex
+      .select("id", "title", "location")
+      .where("id", id)
+      .from("meetings");
+
+    res.json(meeting);
+  } catch (error) {
+    console.error("Database connection error:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// gets all members of a meeting
+app.get("/api/meeting/:id/user", async (req, res) => {
+  try {
+    const memberIds = await knex
+      .select("user_id")
+      .from("user_meeting")
+      .where("meeting_id", req.params.id);
+
+    const members = [];
+
+    for (let i = 0; i < memberIds.length; i++) {
+      const [tmpMember] = await knex
+        .select("id", "username", "city")
+        .from("users")
+        .where("id", memberIds[i].user_id);
+
+      members.push(tmpMember);
+    }
+
+    res.json(members);
+  } catch (error) {
+    console.error("Database connection error:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//gets all board games
 app.get("/api/board_game", async (req, res) => {
   try {
     const boardGames = await knex
@@ -75,15 +120,13 @@ app.get("/api/board_game", async (req, res) => {
   }
 });
 
-// get users collection
+// get a users board game collection
 app.get("/api/user/:id/board_game", async (req, res) => {
   try {
     const ownedGameIds = await knex
       .select("board_game_id")
       .from("user_board_game")
       .where("user_id", req.params.id);
-
-    console.log(ownedGameIds);
 
     const boardGames = [];
 
@@ -96,8 +139,6 @@ app.get("/api/user/:id/board_game", async (req, res) => {
       boardGames.push(tmpBG);
     }
 
-    console.log("USER BOARDGAMES", boardGames);
-
     res.json(boardGames);
   } catch (error) {
     console.error("Database connection error:", error);
@@ -105,15 +146,10 @@ app.get("/api/user/:id/board_game", async (req, res) => {
   }
 });
 
-// add game to users board game collection
+// add a game to a users board game collection
 app.post("/api/user/:id/board_game/add", async (req, res) => {
   try {
-    console.log("ID BEFORE", req.params.id);
-
     const userId = Number(req.params.id);
-
-    console.log("USER ID", userId);
-    console.log("USER ID TYPE", typeof userId);
 
     const boardGameId = await knex("board_games").returning("id").insert({
       name: req.body.name,
@@ -122,10 +158,7 @@ app.post("/api/user/:id/board_game/add", async (req, res) => {
       description: req.body.description,
     });
 
-    console.log("BG ID", boardGameId);
-    console.log("BG ID TYPE", typeof boardGameId);
-
-    const userAndBoardGameIds = await knex("user_board_game").insert({
+    await knex("user_board_game").insert({
       user_id: userId,
       board_game_id: boardGameId[0].id,
     });
@@ -137,15 +170,13 @@ app.post("/api/user/:id/board_game/add", async (req, res) => {
   }
 });
 
-// get meetings library
+// get a meetings board game library
 app.get("/api/meeting/:id/board_game", async (req, res) => {
   try {
     const ownedGameIds = await knex
       .select("board_game_id")
       .from("meeting_board_game")
       .where("meeting_id", req.params.id);
-
-    console.log(ownedGameIds);
 
     const boardGames = [];
 
@@ -158,9 +189,25 @@ app.get("/api/meeting/:id/board_game", async (req, res) => {
       );
     }
 
-    console.log("MEETING BOARDGAMES", boardGames);
-
     res.json(boardGames);
+  } catch (error) {
+    console.error("Database connection error:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// add member to meeting
+app.post("/api/meeting/:meetingId/user/:userId/add", async (req, res) => {
+  try {
+    const userId = Number(req.params.userId);
+    const meetingId = Number(req.params.meetingId);
+
+    await knex("user_meeting").insert({
+      user_id: userId,
+      meeting_id: meetingId,
+    });
+
+    res.json({ userId: userId, meetingId: meetingId });
   } catch (error) {
     console.error("Database connection error:", error);
     res.status(500).json({ error: error.message });

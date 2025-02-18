@@ -9,6 +9,7 @@ console.log("URL:", URL);
 export const getAllUserData = async () => {
   const response = await fetch(`${URL}/api/user`);
   const result = await response.json();
+
   return result;
 };
 
@@ -16,6 +17,7 @@ export const getAllUserData = async () => {
 export const getUsersCollection = async (id: number | undefined) => {
   const response = await fetch(`${URL}/api/user/${id}/board_game`);
   const result = await response.json();
+
   return result;
 };
 
@@ -24,8 +26,6 @@ export const addGameToCollection = async (
   formData: FormData,
   id: number | undefined
 ) => {
-  console.log("ADDING ON THIS ID (FETCH)", id);
-
   const response = await fetch(`${URL}/api/user/${id}/board_game/add`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -38,7 +38,7 @@ export const addGameToCollection = async (
     }),
   });
   const result = await response.json();
-  console.log(result);
+
   return result;
 };
 
@@ -46,6 +46,38 @@ export const addGameToCollection = async (
 export const getAllMeetingData = async () => {
   const response = await fetch(`${URL}/api/meeting`);
   const result = await response.json();
+
+  return result;
+};
+
+export const getMeetingById = async (id: number | undefined) => {
+  const response = await fetch(`${URL}/api/meeting/${id}`);
+  const result = await response.json();
+
+  return result;
+};
+
+// fetches meeting members
+export const getMembers = async (id: number | undefined) => {
+  const response = await fetch(`${URL}/api/meeting/${id}/user`);
+  const result = await response.json();
+
+  return result;
+};
+
+// add a member to a meeting
+export const addMember = async (
+  meetingId: number | undefined,
+  userId: number | undefined
+) => {
+  const response = await fetch(
+    `${URL}/api/meeting/${meetingId}/user/${userId}/add`,
+    {
+      method: "POST",
+    }
+  );
+  const result = await response.json();
+
   return result;
 };
 
@@ -53,6 +85,7 @@ export const getAllMeetingData = async () => {
 export const getAllBoardGameData = async () => {
   const response = await fetch(`${URL}/api/board_game`);
   const result = await response.json();
+
   return result;
 };
 
@@ -69,7 +102,7 @@ export const login = async (formData: FormData) => {
     credentials: "include",
   });
   const result = await response.json();
-  console.log(result.message, result.user);
+
   return result.user;
 };
 
@@ -86,7 +119,7 @@ export const register = async (formData: FormData) => {
     credentials: "include",
   });
   const result = await response.json();
-  console.log(result.message, result.user);
+
   return result;
 };
 
@@ -97,7 +130,7 @@ export const logout = async () => {
     credentials: "include",
   });
   const result = await response.json();
-  console.log(result.message, result.user);
+
   return result;
 };
 
@@ -107,7 +140,6 @@ export const checkAuth = async () => {
     credentials: "include",
   });
   const result = await response.json();
-  console.log(result.message, result.user);
 
   if (result.message === "Unauthorized") {
     result.user = { status: "unauthed" };

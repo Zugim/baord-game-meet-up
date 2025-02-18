@@ -25,3 +25,9 @@ export interface CurrentUser {
   city?: string;
   status: string;
 }
+
+export interface CurrentMeeting {
+  id: number;
+  title: string;
+  location: string;
+}
