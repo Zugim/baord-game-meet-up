@@ -47,6 +47,34 @@ app.get("/api/user", async (req, res) => {
   }
 });
 
+app.get("/api/meeting", async (req, res) => {
+  try {
+    const meetings = await knex
+      .select("id", "title", "location")
+      .from("meetings")
+      .limit(100);
+
+    res.json(meetings);
+  } catch (error) {
+    console.error("Database connection error:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/board_game", async (req, res) => {
+  try {
+    const board_games = await knex
+      .select("id", "name", "primary_mechanic", "theme", "description")
+      .from("board_games")
+      .limit(100);
+
+    res.json(board_games);
+  } catch (error) {
+    console.error("Database connection error:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {

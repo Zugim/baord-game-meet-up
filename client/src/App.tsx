@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router";
 
 // helpers
-import { getAllUserData, logout, checkAuth } from "./helpers/fetchHelpers";
+import {
+  getAllUserData,
+  getAllMeetingData,
+  getAllBoardGameData,
+  logout,
+  checkAuth,
+} from "./helpers/fetchHelpers";
 
 //components
 import HomePage from "./components/HomePage";
@@ -10,7 +16,7 @@ import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 
 // types
-import { User } from "../globalTypes";
+import { User, Meeting, BoardGame } from "../globalTypes";
 
 // styles
 import "./App.css";
@@ -18,21 +24,31 @@ import "./App.css";
 function App() {
   const navigate = useNavigate();
 
-  const [userData, setUserData] = useState(null);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [userData, setUserData] = useState<User[] | null>(null);
+  const [meetingData, setMeetingData] = useState<Meeting[] | null>(null);
+  const [boardGameData, setBoardGameData] = useState<BoardGame[] | null>(null);
 
   useEffect(() => {
-    (async () => setUserData(await getAllUserData()))();
     (async () => setCurrentUser(await checkAuth()))();
+    (async () => setUserData(await getAllUserData()))();
+    (async () => setMeetingData(await getAllMeetingData()))();
+    (async () => setBoardGameData(await getAllBoardGameData()))();
   }, []);
 
   /* ~~~~~~~~~~ LOGGING ~~~~~~~~~~ */
   useEffect(() => {
-    console.log(userData);
-  }, [userData]);
-  useEffect(() => {
     console.log(currentUser);
   }, [currentUser]);
+  useEffect(() => {
+    console.log("USER DATA:", userData);
+  }, [userData]);
+  useEffect(() => {
+    console.log("MEETING DATA:", meetingData);
+  }, [meetingData]);
+  useEffect(() => {
+    console.log("BOARD GAME DATA:", boardGameData);
+  }, [boardGameData]);
   /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
   return (
@@ -66,7 +82,7 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage meetingData={meetingData} />} />
           <Route
             path="/login"
             element={<LoginPage setCurrentUser={setCurrentUser} />}

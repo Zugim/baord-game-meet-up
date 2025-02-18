@@ -12,6 +12,20 @@ export const getAllUserData = async () => {
   return result;
 };
 
+// fetches related to meetings
+export const getAllMeetingData = async () => {
+  const response = await fetch(`${URL}/api/meeting`);
+  const result = await response.json();
+  return result;
+};
+
+// fetches related to board games
+export const getAllBoardGameData = async () => {
+  const response = await fetch(`${URL}/api/board_game`);
+  const result = await response.json();
+  return result;
+};
+
 // fetches realted to auth
 // logs the user in
 export const login = async (formData: FormData) => {

@@ -5,6 +5,9 @@
 exports.up = function (knex) {
   return knex.schema.createTable("meetings", function (table) {
     table.increments("id").primary();
+    table.string("title").notNullable();
+    table.string("location").notNullable();
+    table.timestamps(true, true);
   });
 };
 
