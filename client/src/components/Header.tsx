@@ -23,10 +23,9 @@ export default function Header({ currentUser, setCurrentUser }: HeaderProps) {
         <div className="logo">bgmu</div>
       </Link>
       <div className="auth-controls">
-        <p>{currentUser?.status}</p>
         {currentUser?.status === "authed" ? (
           <>
-            <Link to="/User" className="btn-link">
+            <Link to="/user" className="btn-link">
               <button>Profile</button>
             </Link>
             <button

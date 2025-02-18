@@ -12,6 +12,36 @@ export const getAllUserData = async () => {
   return result;
 };
 
+// fetches users board game collection
+export const getUsersCollection = async (id: number | undefined) => {
+  const response = await fetch(`${URL}/api/user/${id}/board_game`);
+  const result = await response.json();
+  return result;
+};
+
+// add a game to the users board game collection
+export const addGameToCollection = async (
+  formData: FormData,
+  id: number | undefined
+) => {
+  console.log("ADDING ON THIS ID (FETCH)", id);
+
+  const response = await fetch(`${URL}/api/user/${id}/board_game/add`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      id: id,
+      name: formData.get("name"),
+      primary_mechanic: formData.get("primary-mechanic"),
+      theme: formData.get("theme"),
+      description: formData.get("description"),
+    }),
+  });
+  const result = await response.json();
+  console.log(result);
+  return result;
+};
+
 // fetches related to meetings
 export const getAllMeetingData = async () => {
   const response = await fetch(`${URL}/api/meeting`);

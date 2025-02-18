@@ -14,6 +14,8 @@ import HomePage from "./components/HomePage";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import UserPage from "./components/UserPage";
+import MeetingPage from "./components/MeetingPage";
+import NotFoundPage from "./components/NotFoundPage";
 
 // types
 import { User, Meeting, BoardGame, CurrentUser } from "../globalTypes";
@@ -50,14 +52,14 @@ function App() {
   /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<HomePage meetingData={meetingData} />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/user" element={<UserPage />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="*" element={<NotFoundPage />} />
+      <Route path="/" element={<HomePage meetingData={meetingData} />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/user" element={<UserPage />} />
+      <Route path="/meeting/:id" element={<MeetingPage />} />
+    </Routes>
   );
 }
 

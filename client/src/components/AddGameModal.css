@@ -1,0 +1,13 @@
+.add-new-game-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 1rem;
+  background-color: var(--white);
+  border-radius: 0.5rem;
+}
+
+.add-new-game-modal h2 {
+  width: 400px;
+}

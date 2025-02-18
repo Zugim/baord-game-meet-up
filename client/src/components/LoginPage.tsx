@@ -20,6 +20,13 @@ export default function LoginPage() {
     (async () => setCurrentUser(await checkAuth()))();
   }, []);
 
+  // makes page public only
+  useEffect(() => {
+    if (currentUser?.status === "authed") {
+      navigate("/user", { replace: true });
+    }
+  }, [currentUser]);
+
   return (
     <>
       <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />

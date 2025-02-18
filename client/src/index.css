@@ -51,6 +51,10 @@ p {
   color: var(--light-grey);
 }
 
+.emoji {
+  font-style: normal;
+}
+
 button {
   display: flex;
   align-items: center;
@@ -85,7 +89,7 @@ button:focus {
 form {
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  width: 400px;
 }
 
 label {

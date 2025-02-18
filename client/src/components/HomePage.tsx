@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router";
 
 // helpers
 import { checkAuth } from "../helpers/fetchHelpers";
@@ -28,7 +29,14 @@ export default function HomePage({ meetingData }: HomePageProps) {
       <main>
         <h1>Upcoming Board Game Meets</h1>
         {meetingData?.map((meeting) => (
-          <MeetingItem key={meeting.id} meeting={meeting} />
+          <Link
+            key={meeting.id}
+            to={`/meeting/${meeting.id}`}
+            state={meeting}
+            className="btn-link"
+          >
+            <MeetingItem meeting={meeting} />
+          </Link>
         ))}
       </main>
       <Footer />
