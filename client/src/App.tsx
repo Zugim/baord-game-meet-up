@@ -14,9 +14,10 @@ import {
 import HomePage from "./components/HomePage";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
+import UserPage from "./components/UserPage";
 
 // types
-import { User, Meeting, BoardGame } from "../globalTypes";
+import { User, Meeting, BoardGame, CurrentUser } from "../globalTypes";
 
 // styles
 import "./App.css";
@@ -24,7 +25,7 @@ import "./App.css";
 function App() {
   const navigate = useNavigate();
 
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
   const [userData, setUserData] = useState<User[] | null>(null);
   const [meetingData, setMeetingData] = useState<Meeting[] | null>(null);
   const [boardGameData, setBoardGameData] = useState<BoardGame[] | null>(null);
@@ -38,7 +39,7 @@ function App() {
 
   /* ~~~~~~~~~~ LOGGING ~~~~~~~~~~ */
   useEffect(() => {
-    console.log(currentUser);
+    console.log("CURRENT USER:", currentUser);
   }, [currentUser]);
   useEffect(() => {
     console.log("USER DATA:", userData);
@@ -58,16 +59,21 @@ function App() {
           <div className="logo">bgmu</div>
         </Link>
         <div className="auth-controls">
-          {currentUser ? (
-            <button
-              onClick={() => {
-                logout();
-                setCurrentUser(null);
-                navigate("/");
-              }}
-            >
-              Logout
-            </button>
+          {currentUser?.status === "authed" ? (
+            <>
+              <Link to="/User" className="btn-link">
+                <button>Profile</button>
+              </Link>
+              <button
+                onClick={() => {
+                  logout();
+                  setCurrentUser({ status: "unauthed" });
+                  navigate("/");
+                }}
+              >
+                Logout
+              </button>
+            </>
           ) : (
             <>
               <Link to="/login" className="btn-link">
@@ -88,6 +94,7 @@ function App() {
             element={<LoginPage setCurrentUser={setCurrentUser} />}
           />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/user" element={<UserPage />} />
         </Routes>
       </main>
       <footer>

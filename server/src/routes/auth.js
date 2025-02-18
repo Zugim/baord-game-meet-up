@@ -55,7 +55,7 @@ router.post("/login", async (req, res) => {
 
   try {
     const user = await knex("users")
-      .select("id", "username", "password")
+      .select("id", "username", "city", "password")
       .where("username", userData.username)
       .first();
 
@@ -64,7 +64,7 @@ router.post("/login", async (req, res) => {
 
       res.status(200).json({
         message: "Successfully logged in",
-        user: { id: user.id, username: user.username },
+        user: { id: user.id, username: user.username, city: user.city },
       });
     } else {
       res.status(401).json({ message: "Invalid credentials" });

@@ -2,6 +2,7 @@ export interface User {
   id: number;
   username: string;
   city: string;
+  status: string;
 }
 
 export interface Meeting {
@@ -16,4 +17,11 @@ export interface BoardGame {
   primary_description: string;
   theme: string;
   description: string;
+}
+
+export interface CurrentUser {
+  id?: number;
+  username?: string;
+  city?: string;
+  status: string;
 }

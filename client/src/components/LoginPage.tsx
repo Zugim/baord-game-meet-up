@@ -4,10 +4,10 @@ import { useNavigate } from "react-router";
 import { login } from "../helpers/fetchHelpers";
 
 // types
-import { User } from "../../globalTypes";
+import { CurrentUser } from "../../globalTypes";
 
 type LoginPageProps = {
-  setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
+  setCurrentUser: React.Dispatch<React.SetStateAction<CurrentUser | null>>;
 };
 
 export default function LoginPage({ setCurrentUser }: LoginPageProps) {
@@ -19,7 +19,7 @@ export default function LoginPage({ setCurrentUser }: LoginPageProps) {
       <form
         action={async (formData) => {
           setCurrentUser(await login(formData));
-          navigate("/");
+          navigate("/user");
         }}
       >
         <label htmlFor="username">Username</label>

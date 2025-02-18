@@ -78,5 +78,12 @@ export const checkAuth = async () => {
   });
   const result = await response.json();
   console.log(result.message, result.user);
+
+  if (result.message === "Unauthorized") {
+    result.user = { status: "unauthed" };
+  } else {
+    result.user.status = "authed";
+  }
+
   return result.user;
 };
