@@ -1,4 +1,17 @@
 .meeting-item {
-  border-bottom: 1px solid var(--light-grey);
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 2px solid var(--grey-blue);
+  border-radius: 0.5rem;
+  box-shadow: var(--card-shadow);
+
+  background-color: rgba(0, 0, 0, 0.045);
   cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.meeting-item:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+  box-shadow: var(--focus-shadow);
 }

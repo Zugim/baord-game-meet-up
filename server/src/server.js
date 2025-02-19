@@ -61,6 +61,20 @@ app.get("/api/meeting", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+// get all meetings
+app.get("/api/meeting/top", async (req, res) => {
+  try {
+    const meetings = await knex
+      .select("id", "title", "location")
+      .from("meetings")
+      .limit(3);
+
+    res.json(meetings);
+  } catch (error) {
+    console.error("Database connection error:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
 
 // get a meeting by id
 app.get("/api/meeting/:id", async (req, res) => {

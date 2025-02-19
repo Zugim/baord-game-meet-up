@@ -50,6 +50,14 @@ export const getAllMeetingData = async () => {
   return result;
 };
 
+// get top three  meetings
+export const getTopThreeMeetings = async () => {
+  const response = await fetch(`${URL}/api/meeting/top`);
+  const result = await response.json();
+
+  return result;
+};
+
 // get a meeting by id
 export const getMeetingById = async (id: number | undefined) => {
   const response = await fetch(`${URL}/api/meeting/${id}`);

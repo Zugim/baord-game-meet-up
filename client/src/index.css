@@ -86,6 +86,12 @@ button:focus {
   text-decoration: none;
 }
 
+.big-btn {
+  height: auto;
+  font-size: 2rem;
+  padding: 0.5rem 2rem;
+}
+
 form {
   display: flex;
   flex-direction: column;
