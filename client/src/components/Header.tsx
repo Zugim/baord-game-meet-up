@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useLocation } from "react-router";
 
 //helpers
 import { logout, checkAuth } from "../helpers/fetchHelpers";
@@ -16,6 +16,7 @@ type HeaderProps = {
 
 export default function Header({ currentUser, setCurrentUser }: HeaderProps) {
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <header>
@@ -25,9 +26,16 @@ export default function Header({ currentUser, setCurrentUser }: HeaderProps) {
       <div className="auth-controls">
         {currentUser?.status === "authed" ? (
           <>
-            <Link to="/user" className="btn-link">
-              <button>Profile</button>
-            </Link>
+            {location.pathname !== "/meeting/create" && (
+              <Link to="/meeting/create" className="btn-link">
+                <button>Create meeting</button>
+              </Link>
+            )}
+            {location.pathname !== "/user" && (
+              <Link to="/user" className="btn-link">
+                <button>Profile</button>
+              </Link>
+            )}
             <button
               onClick={async () => {
                 await logout();

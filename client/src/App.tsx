@@ -15,6 +15,7 @@ import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import UserPage from "./components/UserPage";
 import MeetingPage from "./components/MeetingPage";
+import CreateMeetingPage from "./components/CreateMeetingPage";
 import NotFoundPage from "./components/NotFoundPage";
 
 // types
@@ -54,11 +55,17 @@ function App() {
   return (
     <Routes>
       <Route path="*" element={<NotFoundPage />} />
-      <Route path="/" element={<HomePage meetingData={meetingData} />} />
+      <Route
+        path="/"
+        element={
+          <HomePage meetingData={meetingData} setMeetingData={setMeetingData} />
+        }
+      />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/user" element={<UserPage />} />
       <Route path="/meeting/:id" element={<MeetingPage />} />
+      <Route path="/meeting/create" element={<CreateMeetingPage />} />
     </Routes>
   );
 }

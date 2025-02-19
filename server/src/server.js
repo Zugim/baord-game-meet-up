@@ -79,6 +79,28 @@ app.get("/api/meeting/:id", async (req, res) => {
   }
 });
 
+// add a meeting
+app.post("/api/user/:id/meeting/add", async (req, res) => {
+  try {
+    const userId = Number(req.params.id);
+
+    const meetingId = await knex("meetings").returning("id").insert({
+      title: req.body.title,
+      location: req.body.location,
+    });
+
+    await knex("user_meeting").insert({
+      user_id: userId,
+      meeting_id: meetingId[0].id,
+    });
+
+    res.json({ userId: userId, meetingId: meetingId[0].id });
+  } catch (error) {
+    console.error("Database connection error:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // get all members of a meeting
 app.get("/api/meeting/:id/user", async (req, res) => {
   try {

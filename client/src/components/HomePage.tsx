@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router";
 
 // helpers
-import { checkAuth } from "../helpers/fetchHelpers";
+import { checkAuth, getAllMeetingData } from "../helpers/fetchHelpers";
 
 //components
 import Header from "./Header";
@@ -14,13 +14,18 @@ import { Meeting, CurrentUser } from "../../globalTypes";
 
 type HomePageProps = {
   meetingData: Meeting[] | null;
+  setMeetingData: React.Dispatch<React.SetStateAction<Meeting[] | null>>;
 };
 
-export default function HomePage({ meetingData }: HomePageProps) {
+export default function HomePage({
+  meetingData,
+  setMeetingData,
+}: HomePageProps) {
   const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
 
   useEffect(() => {
     (async () => setCurrentUser(await checkAuth()))();
+    (async () => setMeetingData(await getAllMeetingData()))();
   }, []);
 
   return (

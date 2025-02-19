@@ -4,7 +4,7 @@ footer {
   align-items: center;
   position: sticky;
   top: 100vh;
-  height: 50px;
+  height: 100px;
   margin-top: 1.5rem;
   background-color: var(--dark-green);
 }

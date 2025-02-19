@@ -58,6 +58,25 @@ export const getMeetingById = async (id: number | undefined) => {
   return result;
 };
 
+// add a new meeting
+export const addMeeting = async (
+  formData: FormData,
+  id: number | undefined
+) => {
+  const response = await fetch(`${URL}/api/user/${id}/meeting/add`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      id: id,
+      title: formData.get("title"),
+      location: formData.get("location"),
+    }),
+  });
+  const result = await response.json();
+
+  return result;
+};
+
 // get all members of a meeting
 export const getMembers = async (id: number | undefined) => {
   const response = await fetch(`${URL}/api/meeting/${id}/user`);
@@ -90,7 +109,7 @@ export const getMeetingLibrary = async (id: number | undefined) => {
   return result;
 };
 
-// add a game to a meeting library <------ TODO
+// add a game to a meeting library
 export const addGameToLibrary = async (
   formData: FormData,
   id: number | undefined
