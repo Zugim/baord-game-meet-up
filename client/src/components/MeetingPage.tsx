@@ -77,7 +77,6 @@ export default function MeetingPage() {
               onClick={() =>
                 setCurrentModal(
                   <AddGameToLibraryModal
-                    currentUser={currentUser}
                     setLibrary={setLibrary}
                     setCurrentModal={setCurrentModal}
                   />

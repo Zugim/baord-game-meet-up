@@ -8,16 +8,14 @@ import { getMeetingLibrary, addGameToLibrary } from "../helpers/fetchHelpers";
 import "./AddGameToLibraryModal.css";
 
 // types
-import { BoardGame, CurrentUser } from "../../globalTypes";
+import { BoardGame } from "../../globalTypes";
 
 type AddGameToLibraryModalProps = {
-  currentUser: CurrentUser | null;
   setLibrary: React.Dispatch<React.SetStateAction<BoardGame[] | null>>;
   setCurrentModal: React.Dispatch<React.SetStateAction<ReactNode>>;
 };
 
 export default function AddGameToLibraryModal({
-  currentUser,
   setLibrary,
   setCurrentModal,
 }: AddGameToLibraryModalProps) {
