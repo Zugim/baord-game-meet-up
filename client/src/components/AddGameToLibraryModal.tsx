@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { useParams } from "react-router";
 
 // helpers
 import { getMeetingLibrary, addGameToLibrary } from "../helpers/fetchHelpers";
@@ -20,13 +21,16 @@ export default function AddGameToLibraryModal({
   setLibrary,
   setCurrentModal,
 }: AddGameToLibraryModalProps) {
+  const params = useParams();
+  const id = Number(params.id);
+
   return (
     <div className="add-new-game-modal">
       <h2>Add a New Game</h2>
       <form
         action={async (formData) => {
-          await addGameToLibrary(formData, currentUser?.id);
-          setLibrary(await getMeetingLibrary(currentUser?.id));
+          await addGameToLibrary(formData, id);
+          setLibrary(await getMeetingLibrary(id));
           setCurrentModal(null);
         }}
       >
