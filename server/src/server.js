@@ -6,7 +6,7 @@ const cors = require("cors");
 const path = require("path");
 const auth = require("./routes/auth");
 
-// checks if in development or production
+// check if in development or production
 ENVIRONMENT = process.env.NODE_ENV || "development";
 console.log("ENVIRONMENT:", ENVIRONMENT);
 
@@ -32,7 +32,7 @@ app.use(express.json());
 // routes
 app.use("/api/auth", auth);
 
-// gets all users
+// get all users
 app.get("/api/user", async (req, res) => {
   try {
     const users = await knex
@@ -47,7 +47,7 @@ app.get("/api/user", async (req, res) => {
   }
 });
 
-// gets all meetings
+// get all meetings
 app.get("/api/meeting", async (req, res) => {
   try {
     const meetings = await knex
@@ -62,7 +62,7 @@ app.get("/api/meeting", async (req, res) => {
   }
 });
 
-// gets a meeting by id
+// get a meeting by id
 app.get("/api/meeting/:id", async (req, res) => {
   try {
     const id = req.params.id;
@@ -79,7 +79,7 @@ app.get("/api/meeting/:id", async (req, res) => {
   }
 });
 
-// gets all members of a meeting
+// get all members of a meeting
 app.get("/api/meeting/:id/user", async (req, res) => {
   try {
     const memberIds = await knex
@@ -99,6 +99,32 @@ app.get("/api/meeting/:id/user", async (req, res) => {
     }
 
     res.json(members);
+  } catch (error) {
+    console.error("Database connection error:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// get a meetings library
+app.get("/api/meeting/:id/board_game", async (req, res) => {
+  try {
+    const boardGameIds = await knex
+      .select("board_game_id")
+      .from("meeting_board_game")
+      .where("meeting_id", req.params.id);
+
+    const board_games = [];
+
+    for (let i = 0; i < boardGameIds.length; i++) {
+      const [tmpBG] = await knex
+        .select("*")
+        .from("board_games")
+        .where("id", boardGameIds[i].board_game_id);
+
+      board_games.push(tmpBG);
+    }
+
+    res.json(board_games);
   } catch (error) {
     console.error("Database connection error:", error);
     res.status(500).json({ error: error.message });
@@ -190,6 +216,31 @@ app.get("/api/meeting/:id/board_game", async (req, res) => {
     }
 
     res.json(boardGames);
+  } catch (error) {
+    console.error("Database connection error:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// add a game to a meetings board game library <------ TODO
+app.post("/api/meeting/:id/board_game/add", async (req, res) => {
+  try {
+    const meetingId = Number(req.params.id);
+
+    // TODO make it so can only add games from own collection
+    const boardGameId = await knex("board_games").returning("id").insert({
+      name: req.body.name,
+      primary_mechanic: req.body.primary_mechanic,
+      theme: req.body.theme,
+      description: req.body.description,
+    });
+
+    await knex("meeting_board_game").insert({
+      meeting_id: meetingId,
+      board_game_id: boardGameId[0].id,
+    });
+
+    res.json({ meetingId: meetingId, boardGameId: boardGameId[0].id });
   } catch (error) {
     console.error("Database connection error:", error);
     res.status(500).json({ error: error.message });

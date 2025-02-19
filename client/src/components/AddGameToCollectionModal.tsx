@@ -7,22 +7,22 @@ import {
 } from "../helpers/fetchHelpers";
 
 // styles
-import "./AddGameModal.css";
+import "./AddGameToCollectionModal.css";
 
 // types
 import { BoardGame, CurrentUser } from "../../globalTypes";
 
-type AddGameModalProps = {
+type AddGameToCollectionModalProps = {
   currentUser: CurrentUser | null;
   setCollection: React.Dispatch<React.SetStateAction<BoardGame[] | null>>;
   setCurrentModal: React.Dispatch<React.SetStateAction<ReactNode>>;
 };
 
-export default function AddGameModal({
+export default function AddGameToCollectionModal({
   currentUser,
   setCollection,
   setCurrentModal,
-}: AddGameModalProps) {
+}: AddGameToCollectionModalProps) {
   return (
     <div className="add-new-game-modal">
       <h2>Add a New Game</h2>

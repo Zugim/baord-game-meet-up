@@ -5,7 +5,7 @@ console.log("ENVIRONMENT:", import.meta.env.MODE);
 const URL = import.meta.env.VITE_BASE_URL;
 console.log("URL:", URL);
 
-// fetches related to users
+// get all users
 export const getAllUserData = async () => {
   const response = await fetch(`${URL}/api/user`);
   const result = await response.json();
@@ -13,7 +13,7 @@ export const getAllUserData = async () => {
   return result;
 };
 
-// fetches users board game collection
+// get a users board game collection
 export const getUsersCollection = async (id: number | undefined) => {
   const response = await fetch(`${URL}/api/user/${id}/board_game`);
   const result = await response.json();
@@ -42,7 +42,7 @@ export const addGameToCollection = async (
   return result;
 };
 
-// fetches related to meetings
+// get all meetings
 export const getAllMeetingData = async () => {
   const response = await fetch(`${URL}/api/meeting`);
   const result = await response.json();
@@ -50,6 +50,7 @@ export const getAllMeetingData = async () => {
   return result;
 };
 
+// get a meeting by id
 export const getMeetingById = async (id: number | undefined) => {
   const response = await fetch(`${URL}/api/meeting/${id}`);
   const result = await response.json();
@@ -57,7 +58,7 @@ export const getMeetingById = async (id: number | undefined) => {
   return result;
 };
 
-// fetches meeting members
+// get all members of a meeting
 export const getMembers = async (id: number | undefined) => {
   const response = await fetch(`${URL}/api/meeting/${id}/user`);
   const result = await response.json();
@@ -81,7 +82,36 @@ export const addMember = async (
   return result;
 };
 
-// fetches related to board games
+// get a meetings library
+export const getMeetingLibrary = async (id: number | undefined) => {
+  const response = await fetch(`${URL}/api/meeting/${id}/board_game`);
+  const result = await response.json();
+
+  return result;
+};
+
+// add a game to a meeting library <------ TODO
+export const addGameToLibrary = async (
+  formData: FormData,
+  id: number | undefined
+) => {
+  const response = await fetch(`${URL}/api/meeting/${id}/board_game/add`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      id: id,
+      name: formData.get("name"),
+      primary_mechanic: formData.get("primary-mechanic"),
+      theme: formData.get("theme"),
+      description: formData.get("description"),
+    }),
+  });
+  const result = await response.json();
+
+  return result;
+};
+
+// get all board games
 export const getAllBoardGameData = async () => {
   const response = await fetch(`${URL}/api/board_game`);
   const result = await response.json();
@@ -89,8 +119,8 @@ export const getAllBoardGameData = async () => {
   return result;
 };
 
-// fetches realted to auth
-// logs the user in
+// AUTHENTICATION
+// log the user in
 export const login = async (formData: FormData) => {
   const response = await fetch(`${URL}/api/auth/login`, {
     method: "POST",
@@ -106,7 +136,7 @@ export const login = async (formData: FormData) => {
   return result.user;
 };
 
-//registers the user
+//register the user
 export const register = async (formData: FormData) => {
   const response = await fetch(`${URL}/api/auth/register`, {
     method: "POST",
@@ -123,7 +153,7 @@ export const register = async (formData: FormData) => {
   return result;
 };
 
-// logs out the user
+// log out the user
 export const logout = async () => {
   const response = await fetch(`${URL}/api/auth/logout`, {
     method: "DELETE",
@@ -134,7 +164,7 @@ export const logout = async () => {
   return result;
 };
 
-//checks if user is logged in and authorized
+//check if user is logged in and authorized
 export const checkAuth = async () => {
   const response = await fetch(`${URL}/api/auth/user`, {
     credentials: "include",

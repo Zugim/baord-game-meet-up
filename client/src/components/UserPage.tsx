@@ -8,7 +8,7 @@ import { getUsersCollection, checkAuth } from "../helpers/fetchHelpers";
 import Header from "./Header";
 import Footer from "./Footer";
 import Modal from "./Modal";
-import AddGameModal from "./AddGameModal";
+import AddGameToCollectionModal from "./AddGameToCollectionModal";
 
 // types
 import { BoardGame, CurrentUser } from "../../globalTypes";
@@ -57,7 +57,7 @@ export default function UserPage() {
         <button
           onClick={() =>
             setCurrentModal(
-              <AddGameModal
+              <AddGameToCollectionModal
                 currentUser={currentUser}
                 setCollection={setCollection}
                 setCurrentModal={setCurrentModal}
