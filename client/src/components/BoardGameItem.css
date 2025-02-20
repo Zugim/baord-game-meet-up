@@ -1,0 +1,45 @@
+.board-game-item {
+  background-color: rgba(187, 192, 198, 0.401);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  border: 2px solid var(--dark-green);
+}
+
+.board-game-title {
+  background-color: var(--dark-green);
+  color: var(--white);
+  padding: 0.2rem 1rem;
+  font-family: "Hind Vadodara", serif;
+  cursor: pointer;
+}
+
+.dropdown-hint {
+  display: flex;
+  justify-content: center;
+  color: var(--dark-green);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.dropdown-hint svg path {
+  color: var(--dark-green);
+}
+
+.board-game-title:hover {
+  background-color: var(--light-green);
+  color: var(--dark-green);
+}
+
+.board-game-title:hover h3 {
+  color: var(--dark-green);
+}
+
+.board-game-title h3 {
+  color: var(--white);
+  font-weight: 500;
+}
+
+.board-game-details {
+  padding: 0.5rem 1rem;
+}

@@ -15,6 +15,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Modal from "./Modal";
 import AddGameToLibraryModal from "./AddGameToLibraryModal";
+import BoardGameItem from "./BoardGameItem";
 
 // types
 import {
@@ -35,6 +36,10 @@ export default function MeetingPage() {
   const [members, setMembers] = useState<User[] | null>(null);
   const [library, setLibrary] = useState<BoardGame[] | null>(null);
   const [currentModal, setCurrentModal] = useState<ReactNode | null>(null);
+  const [isMember, setIsMember] = useState<boolean | undefined>(undefined);
+  const [meetingDate, setMeetingDate] = useState<string>("");
+
+  let memberIds: number[] | undefined = [];
 
   useEffect(() => {
     (async () => setCurrentUser(await checkAuth()))();
@@ -44,47 +49,94 @@ export default function MeetingPage() {
   useEffect(() => {
     (async () => setMembers(await getMembers(id)))();
     (async () => setLibrary(await getMeetingLibrary(id)))();
+    setMeetingDate(
+      new Date(currentMeeting?.date as string).toLocaleDateString()
+    );
   }, [currentMeeting]);
+
+  useEffect(() => {
+    memberIds = members?.map((member) => member.id);
+    setIsMember(memberIds?.includes(currentUser?.id as number));
+    console.log("IS MEMBER?", isMember);
+  }, [members]);
 
   return (
     <>
       {currentModal && (
         <Modal currentModal={currentModal} setCurrentModal={setCurrentModal} />
       )}
-      <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <Header currentUser={currentUser} />
       <main>
         {currentMeeting?.title ? (
           <>
-            <h2>{currentMeeting?.title}</h2>
-            <p>{currentMeeting?.location}</p>
+            <h1>{currentMeeting?.title}</h1>
+            <p>
+              <span>Location: </span>
+              {currentMeeting.location}
+            </p>
+            <p>
+              <span>Date: {meetingDate}</span>
+              {}
+            </p>
+            <p>
+              <span>Start Time: </span>
+              {currentMeeting.start_time}
+            </p>
+            <p>
+              <span>Finish Time: </span>
+              {currentMeeting.finish_time}
+            </p>
             <h2>Members</h2>
             {members?.map((member) => (
-              <p key={member.id}>{member.username}</p>
+              <div key={member.id}>
+                <p>
+                  <span>Username: </span>
+                  {member.username}
+                </p>
+                <p>
+                  <span>Location: </span>
+                  {member.city}
+                </p>
+                <p>
+                  <span>Langauges Spoken: </span>
+                  {member.languages}
+                </p>
+              </div>
             ))}
             <h2>Library</h2>
-            {library?.map((board_game) => (
-              <p key={board_game.id}>{board_game?.name}</p>
+            {library?.map((boardGame) => (
+              <BoardGameItem key={boardGame.id} boardGame={boardGame} />
             ))}
-            <button
-              onClick={async () => {
-                await addMember(currentMeeting.id, currentUser?.id);
-                setMembers(await getMembers(id));
-              }}
-            >
-              RSVP
-            </button>
-            <button
-              onClick={() =>
-                setCurrentModal(
-                  <AddGameToLibraryModal
-                    setLibrary={setLibrary}
-                    setCurrentModal={setCurrentModal}
-                  />
-                )
-              }
-            >
-              Add new game
-            </button>
+            {currentUser?.status === "authed" && (
+              <div className="user-controls">
+                {!isMember && (
+                  <button
+                    className="pop-btn"
+                    onClick={async () => {
+                      await addMember(currentMeeting.id, currentUser?.id);
+                      setMembers(await getMembers(id));
+                    }}
+                  >
+                    RSVP
+                  </button>
+                )}
+                {isMember && (
+                  <button
+                    className="pop-btn"
+                    onClick={() =>
+                      setCurrentModal(
+                        <AddGameToLibraryModal
+                          setLibrary={setLibrary}
+                          setCurrentModal={setCurrentModal}
+                        />
+                      )
+                    }
+                  >
+                    Add new game
+                  </button>
+                )}
+              </div>
+            )}
           </>
         ) : (
           <h1>

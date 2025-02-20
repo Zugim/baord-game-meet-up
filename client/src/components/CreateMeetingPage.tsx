@@ -31,9 +31,9 @@ export default function CreateMeetingPage() {
 
   return (
     <>
-      <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
-      <main>
-        <h2>Create meeting</h2>
+      <Header currentUser={currentUser} />
+      <main className="small-page">
+        <h1>Create meeting</h1>
         <form
           action={async (formData) => {
             const { meetingId } = await addMeeting(formData, currentUser?.id);
@@ -52,7 +52,25 @@ export default function CreateMeetingPage() {
           <input
             type="text"
             name="location"
-            placeholder="Where is your meet?"
+            placeholder="Where is your meetup?"
+          />
+          <label htmlFor="date">Date</label>
+          <input
+            type="date"
+            name="date"
+            placeholder="What day is your meetup?"
+          />
+          <label htmlFor="start-time">Start time</label>
+          <input
+            type="time"
+            name="start-time"
+            placeholder="When does your meetup start?"
+          />
+          <label htmlFor="start-time">Finish time</label>
+          <input
+            type="time"
+            name="finish-time"
+            placeholder="When does your meetup finish?"
           />
           <button type="submit">Register</button>
         </form>

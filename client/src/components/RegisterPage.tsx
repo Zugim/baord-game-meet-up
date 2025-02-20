@@ -29,9 +29,9 @@ export default function RegisterPage() {
 
   return (
     <>
-      <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
-      <main>
-        <h2>Register</h2>
+      <Header currentUser={currentUser} />
+      <main className="small-page">
+        <h1>Register</h1>
         <form
           action={async (formData) => {
             await register(formData);
@@ -53,6 +53,12 @@ export default function RegisterPage() {
           />
           <label htmlFor="city">City</label>
           <input type="text" name="city" placeholder="Tokyo" />
+          <label htmlFor="languages">Languages Spoken</label>
+          <input
+            type="text"
+            name="languages"
+            placeholder="English, Japanese (Beginner)"
+          />
           <button type="submit">Register</button>
         </form>
       </main>

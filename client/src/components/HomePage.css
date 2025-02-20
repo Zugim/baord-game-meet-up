@@ -23,6 +23,9 @@
   width: 100%;
   height: calc(100dvh - 80px);
   background: rgba(227, 238, 174, 0.7);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .hero h1 {
@@ -34,4 +37,8 @@
 .top-three {
   display: flex;
   gap: 3rem;
+}
+
+.upcoming {
+  margin-bottom: 1.6rem;
 }

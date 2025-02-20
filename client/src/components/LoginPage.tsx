@@ -29,9 +29,9 @@ export default function LoginPage() {
 
   return (
     <>
-      <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
-      <main>
-        <h2>Please Login</h2>
+      <Header currentUser={currentUser} />
+      <main className="small-page">
+        <h1>Please Login</h1>
         <form
           action={async (formData) => {
             setCurrentUser(await login(formData));

@@ -44,11 +44,11 @@ export default function HomePage({
 
   return (
     <>
-      <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <Header currentUser={currentUser} />
       {currentUser?.status === "authed" ? (
         <>
           <main>
-            <h1>Upcoming Board Game Meets</h1>
+            <h1 className="upcoming">Upcoming Board Game Meets</h1>
             {meetingData?.map((meeting) => (
               <Link
                 key={meeting.id}
@@ -65,7 +65,7 @@ export default function HomePage({
       ) : (
         <main className="hero">
           <div className="overlay">
-            <h1>Find People To Board Game With!</h1>
+            <h1>Find People To Board Game With</h1>
             <div className="top-three">
               {topThree?.map((meeting, index) => (
                 <Link
@@ -79,7 +79,7 @@ export default function HomePage({
               ))}
             </div>
             <Link to="/register" className="btn-link">
-              <button className="big-btn">Find your next meet up!</button>
+              <button className="big-btn pop-btn">Find A Meetup</button>
             </Link>
           </div>
         </main>

@@ -50,7 +50,7 @@ export const getAllMeetingData = async () => {
   return result;
 };
 
-// get top three  meetings
+// get top three meetings
 export const getTopThreeMeetings = async () => {
   const response = await fetch(`${URL}/api/meeting/top`);
   const result = await response.json();
@@ -78,6 +78,9 @@ export const addMeeting = async (
       id: id,
       title: formData.get("title"),
       location: formData.get("location"),
+      date: formData.get("date"),
+      startTime: formData.get("start-time"),
+      finishTime: formData.get("finish-time"),
     }),
   });
   const result = await response.json();
@@ -172,6 +175,7 @@ export const register = async (formData: FormData) => {
       username: formData.get("username"),
       password: formData.get("password"),
       city: formData.get("city"),
+      languages: formData.get("languages"),
     }),
     credentials: "include",
   });

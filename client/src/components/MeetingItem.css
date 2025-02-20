@@ -1,17 +1,24 @@
 .meeting-item {
   margin-bottom: 1rem;
-  padding: 0.5rem;
-  border: 2px solid var(--grey-blue);
+  border: 2px solid var(--dark-green);
   border-radius: 0.5rem;
   box-shadow: var(--card-shadow);
-
   background-color: rgba(0, 0, 0, 0.045);
   cursor: pointer;
-  transition: background-color 0.1s ease-in-out;
-  transition: box-shadow 0.2s ease-in-out;
+  overflow: hidden;
 }
 
-.meeting-item:hover {
-  background-color: rgba(0, 0, 0, 0.075);
-  box-shadow: var(--focus-shadow);
+.meeting-item:hover h2 {
+  background-color: var(--light-green);
+  color: var(--dark-green);
+}
+
+.meeting-item h2 {
+  background-color: var(--dark-green);
+  padding: 0.2rem 1rem;
+  color: var(--white);
+}
+
+.meeting-item p {
+  padding: 0 1rem;
 }

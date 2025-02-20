@@ -30,6 +30,7 @@ router.use(session(sessionOptions));
 // register endpoint
 router.post("/register", async (req, res) => {
   const userData = req.body;
+  console.log("BODY", req.body);
 
   userData.password = bcrypt.hashSync(userData.password, 10);
 
@@ -39,8 +40,9 @@ router.post("/register", async (req, res) => {
         username: userData.username,
         password: userData.password,
         city: userData.city,
+        languages: userData.languages,
       })
-      .returning(["id", "username", "city"]);
+      .returning(["id", "username", "city", "languages"]);
 
     res.status(201).json({ message: "Successfully registered", user });
   } catch (err) {
@@ -99,7 +101,7 @@ router.get("/user", async (req, res) => {
 
   try {
     const user = await knex("users")
-      .select("id", "username", "city")
+      .select("id", "username", "city", "languages")
       .where({ id: req.session.user.id })
       .first();
 

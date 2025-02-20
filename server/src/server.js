@@ -36,7 +36,7 @@ app.use("/api/auth", auth);
 app.get("/api/user", async (req, res) => {
   try {
     const users = await knex
-      .select("id", "username", "city")
+      .select("id", "username", "city", "languages")
       .from("users")
       .limit(100);
 
@@ -51,7 +51,7 @@ app.get("/api/user", async (req, res) => {
 app.get("/api/meeting", async (req, res) => {
   try {
     const meetings = await knex
-      .select("id", "title", "location")
+      .select("id", "title", "location", "date", "start_time", "finish_time")
       .from("meetings")
       .limit(100);
 
@@ -61,11 +61,12 @@ app.get("/api/meeting", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-// get all meetings
+
+// get top three meetings
 app.get("/api/meeting/top", async (req, res) => {
   try {
     const meetings = await knex
-      .select("id", "title", "location")
+      .select("id", "title", "location", "date", "start_time", "finish_time")
       .from("meetings")
       .limit(3);
 
@@ -82,7 +83,7 @@ app.get("/api/meeting/:id", async (req, res) => {
     const id = req.params.id;
 
     const [meeting] = await knex
-      .select("id", "title", "location")
+      .select("id", "title", "location", "date", "start_time", "finish_time")
       .where("id", id)
       .from("meetings");
 
@@ -97,10 +98,14 @@ app.get("/api/meeting/:id", async (req, res) => {
 app.post("/api/user/:id/meeting/add", async (req, res) => {
   try {
     const userId = Number(req.params.id);
+    console.log("BODY", req.body);
 
     const meetingId = await knex("meetings").returning("id").insert({
       title: req.body.title,
       location: req.body.location,
+      date: req.body.date,
+      start_time: req.body.startTime,
+      finish_time: req.body.finishTime,
     });
 
     await knex("user_meeting").insert({
@@ -127,7 +132,7 @@ app.get("/api/meeting/:id/user", async (req, res) => {
 
     for (let i = 0; i < memberIds.length; i++) {
       const [tmpMember] = await knex
-        .select("id", "username", "city")
+        .select("id", "username", "city", "languages")
         .from("users")
         .where("id", memberIds[i].user_id);
 
