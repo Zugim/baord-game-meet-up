@@ -1,9 +1,6 @@
 import { ReactNode } from "react";
 import { useParams } from "react-router";
 
-// helpers
-import { getMeetingLibrary, addGameToLibrary } from "../helpers/fetchHelpers";
-
 //components
 import BoardGameItemSimple from "./BoardGameItemSimple";
 
