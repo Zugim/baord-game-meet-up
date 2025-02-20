@@ -19,7 +19,7 @@ export default function NotFoundPage() {
 
   return (
     <>
-      <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <Header currentUser={currentUser} />
       <main>
         <h1>
           Page Not Found! <span className="emoji">😱</span>
