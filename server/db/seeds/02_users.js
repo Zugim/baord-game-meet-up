@@ -10,8 +10,8 @@ exports.seed = async function (knex) {
   await knex("users").insert([
     {
       id: 100,
-      username: "Joe",
-      password: bcrypt.hashSync("joepass", 10),
+      username: "Meisa",
+      password: bcrypt.hashSync("meisapass", 10),
       city: "Hamamatsu",
       languages: "English, Japanese",
     },

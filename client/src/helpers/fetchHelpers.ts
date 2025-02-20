@@ -205,7 +205,10 @@ export const checkAuth = async () => {
   });
   const result = await response.json();
 
-  if (result.message === "Unauthorized") {
+  if (
+    result.message === "Unauthorized" ||
+    result.message === "User not found"
+  ) {
     result.user = { status: "unauthed" };
   } else {
     result.user.status = "authed";

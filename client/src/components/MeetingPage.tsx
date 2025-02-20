@@ -41,17 +41,13 @@ export default function MeetingPage() {
   const [members, setMembers] = useState<User[] | null>(null);
   const [library, setLibrary] = useState<BoardGame[] | null>(null);
   const [currentModal, setCurrentModal] = useState<ReactNode | null>(null);
-  const [isMember, setIsMember] = useState<boolean | undefined>(undefined);
   const [meetingDate, setMeetingDate] = useState<string>("");
   const [collection, setCollection] = useState<BoardGame[] | null>(null);
-
-  let memberIds: number[] | undefined = [];
+  const [memberIds, setMembersIds] = useState<number[] | undefined>([]);
 
   useEffect(() => {
     (async () => setCurrentUser(await checkAuth()))();
     (async () => setCurrentMeeting(await getMeetingById(id)))();
-    memberIds = members?.map((member) => member.id);
-    setIsMember(memberIds?.includes(currentUser?.id as number));
   }, []);
 
   useEffect(() => {
@@ -69,8 +65,7 @@ export default function MeetingPage() {
   }, [currentUser]);
 
   useEffect(() => {
-    memberIds = members?.map((member) => member.id);
-    setIsMember(memberIds?.includes(currentUser?.id as number));
+    setMembersIds(members?.map((member) => member.id));
   }, [members]);
 
   return (
@@ -94,16 +89,22 @@ export default function MeetingPage() {
               </p>
               <p>
                 <span className="tag">Start Time: </span>
-                {currentMeeting.start_time}
+                {currentMeeting.start_time.substring(
+                  0,
+                  currentMeeting.start_time.length - 3
+                )}
               </p>
               <p>
                 <span className="tag">Finish Time: </span>
-                {currentMeeting.finish_time}
+                {currentMeeting.finish_time.substring(
+                  0,
+                  currentMeeting.finish_time.length - 3
+                )}
               </p>
             </div>
             <h2>Members</h2>
             {members?.map((member) => (
-              <MemberItem member={member} />
+              <MemberItem key={member.id} member={member} />
             ))}
             <h2>Library</h2>
             {library?.map((boardGame) => (
@@ -111,7 +112,7 @@ export default function MeetingPage() {
             ))}
             {currentUser?.status === "authed" && (
               <div className="user-controls">
-                {!isMember && (
+                {!memberIds?.includes(currentUser?.id as number) && (
                   <button
                     className="pop-btn"
                     onClick={async () => {
@@ -122,7 +123,7 @@ export default function MeetingPage() {
                     RSVP
                   </button>
                 )}
-                {isMember && (
+                {memberIds?.includes(currentUser?.id as number) && (
                   <button
                     className="pop-btn"
                     onClick={() =>

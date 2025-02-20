@@ -18,6 +18,7 @@ exports.seed = async function (knex) {
       id: 101,
       name: "Nana",
       primary_mechanic: "Memory",
+      theme: "Abstract",
       description: "Go fish with a twist. Can you be the first to get 7.",
     },
     {
@@ -25,6 +26,8 @@ exports.seed = async function (knex) {
       name: "Harmonies",
       primary_mechanic: "Tile Placement",
       theme: "Animals",
+      description:
+        "Place habitat tiles in certain patterns to attract different animals to your landscape.",
     },
   ]);
 };
