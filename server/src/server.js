@@ -269,19 +269,19 @@ app.post("/api/meeting/:id/board_game/add", async (req, res) => {
     const meetingId = Number(req.params.id);
 
     // TODO make it so can only add games from own collection
-    const boardGameId = await knex("board_games").returning("id").insert({
-      name: req.body.name,
-      primary_mechanic: req.body.primary_mechanic,
-      theme: req.body.theme,
-      description: req.body.description,
-    });
+    // const boardGameId = await knex("board_games").returning("id").insert({
+    //   name: req.body.name,
+    //   primary_mechanic: req.body.primary_mechanic,
+    //   theme: req.body.theme,
+    //   description: req.body.description,
+    // });
 
     await knex("meeting_board_game").insert({
       meeting_id: meetingId,
-      board_game_id: boardGameId[0].id,
+      board_game_id: req.body.id,
     });
 
-    res.json({ meetingId: meetingId, boardGameId: boardGameId[0].id });
+    res.json({ meetingId: meetingId, boardGameId: req.body.id });
   } catch (error) {
     console.error("Database connection error:", error);
     res.status(500).json({ error: error.message });

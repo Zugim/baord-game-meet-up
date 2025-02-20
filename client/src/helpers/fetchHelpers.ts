@@ -1,5 +1,8 @@
 /* Helper function for fetching data */
 
+// types
+import { BoardGame } from "../../globalTypes";
+
 console.log("ENVIRONMENT:", import.meta.env.MODE);
 
 const URL = import.meta.env.VITE_BASE_URL;
@@ -122,18 +125,18 @@ export const getMeetingLibrary = async (id: number | undefined) => {
 
 // add a game to a meeting library
 export const addGameToLibrary = async (
-  formData: FormData,
+  boardGame: BoardGame,
   id: number | undefined
 ) => {
   const response = await fetch(`${URL}/api/meeting/${id}/board_game/add`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      id: id,
-      name: formData.get("name"),
-      primary_mechanic: formData.get("primary-mechanic"),
-      theme: formData.get("theme"),
-      description: formData.get("description"),
+      id: boardGame.id,
+      name: boardGame.name,
+      primary_mechanic: boardGame.primary_mechanic,
+      theme: boardGame.theme,
+      description: boardGame.description,
     }),
   });
   const result = await response.json();

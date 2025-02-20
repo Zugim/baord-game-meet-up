@@ -14,7 +14,7 @@ type BoardGameItemProps = {
   boardGame: BoardGame;
 };
 
-export default function MeetingItem({ boardGame }: BoardGameItemProps) {
+export default function BaordGameItem({ boardGame }: BoardGameItemProps) {
   const [detailsHidden, setDetailsHidden] = useState<boolean>(true);
 
   return (

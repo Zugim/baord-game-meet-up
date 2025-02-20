@@ -8,6 +8,7 @@ import {
   addMember,
   getMeetingLibrary,
   checkAuth,
+  getUsersCollection,
 } from "../helpers/fetchHelpers";
 
 //components
@@ -38,6 +39,7 @@ export default function MeetingPage() {
   const [currentModal, setCurrentModal] = useState<ReactNode | null>(null);
   const [isMember, setIsMember] = useState<boolean | undefined>(undefined);
   const [meetingDate, setMeetingDate] = useState<string>("");
+  const [collection, setCollection] = useState<BoardGame[] | null>(null);
 
   let memberIds: number[] | undefined = [];
 
@@ -53,6 +55,12 @@ export default function MeetingPage() {
       new Date(currentMeeting?.date as string).toLocaleDateString()
     );
   }, [currentMeeting]);
+
+  useEffect(() => {
+    if (currentUser?.id) {
+      (async () => setCollection(await getUsersCollection(currentUser?.id)))();
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     memberIds = members?.map((member) => member.id);
@@ -128,6 +136,7 @@ export default function MeetingPage() {
                         <AddGameToLibraryModal
                           setLibrary={setLibrary}
                           setCurrentModal={setCurrentModal}
+                          collection={collection}
                         />
                       )
                     }
