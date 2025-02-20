@@ -5,6 +5,6 @@ footer {
   position: sticky;
   top: 100vh;
   height: 100px;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   background-color: var(--dark-green);
 }

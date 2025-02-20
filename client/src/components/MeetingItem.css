@@ -2,10 +2,14 @@
   margin-bottom: 1rem;
   border: 2px solid var(--dark-green);
   border-radius: 0.5rem;
-  box-shadow: var(--card-shadow);
+  box-shadow: var(--focus-shadow);
   background-color: rgba(0, 0, 0, 0.045);
   cursor: pointer;
   overflow: hidden;
+}
+
+.all-meetings a:last-of-type .meeting-item {
+  margin-bottom: 0;
 }
 
 .meeting-item:hover h2 {
@@ -20,5 +24,11 @@
 }
 
 .meeting-item p {
-  padding: 0 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.meeting-details {
+  margin-left: 1rem;
+  display: flex;
+  gap: 1rem;
 }

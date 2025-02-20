@@ -17,6 +17,7 @@ import Footer from "./Footer";
 import Modal from "./Modal";
 import AddGameToLibraryModal from "./AddGameToLibraryModal";
 import BoardGameItem from "./BoardGameItem";
+import MemberItem from "./MemberItem";
 
 // types
 import {
@@ -25,6 +26,9 @@ import {
   CurrentMeeting,
   BoardGame,
 } from "../../globalTypes";
+
+// styles
+import "./MeetingPage.css";
 
 export default function MeetingPage() {
   const params = useParams();
@@ -46,6 +50,8 @@ export default function MeetingPage() {
   useEffect(() => {
     (async () => setCurrentUser(await checkAuth()))();
     (async () => setCurrentMeeting(await getMeetingById(id)))();
+    memberIds = members?.map((member) => member.id);
+    setIsMember(memberIds?.includes(currentUser?.id as number));
   }, []);
 
   useEffect(() => {
@@ -65,7 +71,6 @@ export default function MeetingPage() {
   useEffect(() => {
     memberIds = members?.map((member) => member.id);
     setIsMember(memberIds?.includes(currentUser?.id as number));
-    console.log("IS MEMBER?", isMember);
   }, [members]);
 
   return (
@@ -77,39 +82,28 @@ export default function MeetingPage() {
       <main>
         {currentMeeting?.title ? (
           <>
-            <h1>{currentMeeting?.title}</h1>
-            <p>
-              <span>Location: </span>
-              {currentMeeting.location}
-            </p>
-            <p>
-              <span>Date: {meetingDate}</span>
-              {}
-            </p>
-            <p>
-              <span>Start Time: </span>
-              {currentMeeting.start_time}
-            </p>
-            <p>
-              <span>Finish Time: </span>
-              {currentMeeting.finish_time}
-            </p>
+            <div className="user-details">
+              <h1>{currentMeeting?.title}</h1>
+              <p>
+                <span className="tag">Location: </span>
+                {currentMeeting.location}
+              </p>
+              <p>
+                <span className="tag">Date: </span>
+                {meetingDate}
+              </p>
+              <p>
+                <span className="tag">Start Time: </span>
+                {currentMeeting.start_time}
+              </p>
+              <p>
+                <span className="tag">Finish Time: </span>
+                {currentMeeting.finish_time}
+              </p>
+            </div>
             <h2>Members</h2>
             {members?.map((member) => (
-              <div key={member.id}>
-                <p>
-                  <span>Username: </span>
-                  {member.username}
-                </p>
-                <p>
-                  <span>Location: </span>
-                  {member.city}
-                </p>
-                <p>
-                  <span>Langauges Spoken: </span>
-                  {member.languages}
-                </p>
-              </div>
+              <MemberItem member={member} />
             ))}
             <h2>Library</h2>
             {library?.map((boardGame) => (
@@ -141,7 +135,7 @@ export default function MeetingPage() {
                       )
                     }
                   >
-                    Add new game
+                    Add A New Game
                   </button>
                 )}
               </div>

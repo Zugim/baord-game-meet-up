@@ -37,7 +37,6 @@ export default function CreateMeetingPage() {
         <form
           action={async (formData) => {
             const { meetingId } = await addMeeting(formData, currentUser?.id);
-            console.log("MEETING ID:", meetingId);
             navigate(`/meeting/${meetingId}`, { replace: true });
           }}
         >
@@ -72,7 +71,9 @@ export default function CreateMeetingPage() {
             name="finish-time"
             placeholder="When does your meetup finish?"
           />
-          <button type="submit">Register</button>
+          <button className="pop-btn" type="submit">
+            Submit
+          </button>
         </form>
       </main>
       <Footer />

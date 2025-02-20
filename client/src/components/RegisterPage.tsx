@@ -59,7 +59,9 @@ export default function RegisterPage() {
             name="languages"
             placeholder="English, Japanese (Beginner)"
           />
-          <button type="submit">Register</button>
+          <button className="pop-btn" type="submit">
+            Submit
+          </button>
         </form>
       </main>
       <Footer />

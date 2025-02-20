@@ -1,29 +1,29 @@
 import { useState } from "react";
 
 // types
-import { BoardGame } from "../../globalTypes";
+import { User } from "../../globalTypes";
 
 // styles
-import "./BoardGameItem.css";
+import "./MemberItem.css";
 
 // icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 type BoardGameItemProps = {
-  boardGame: BoardGame;
+  member: User;
 };
 
-export default function BaordGameItem({ boardGame }: BoardGameItemProps) {
+export default function BaordGameItem({ member }: BoardGameItemProps) {
   const [detailsHidden, setDetailsHidden] = useState<boolean>(true);
 
   return (
-    <div className="board-game-item">
+    <div className="member-item">
       <div
-        className="board-game-title"
+        className="member-name"
         onClick={() => setDetailsHidden(!detailsHidden)}
       >
-        <h3>{boardGame.name}</h3>
+        <h3>{member.username}</h3>
       </div>
       {detailsHidden && (
         <div
@@ -34,21 +34,17 @@ export default function BaordGameItem({ boardGame }: BoardGameItemProps) {
         </div>
       )}
       {!detailsHidden && (
-        <div className="board-game-details">
-          <p>
-            <span className="tag">Primary Mechanic: </span>
-            {boardGame.primary_mechanic}
-          </p>
-          {boardGame.theme && (
+        <div className="member-details">
+          {member.city && (
             <p>
-              <span className="tag">Theme: </span>
-              {boardGame.theme}
+              <span className="tag">Location: </span>
+              {member.city}
             </p>
           )}
-          {boardGame.description && (
+          {member.languages && (
             <p>
-              <span className="tag">Description: </span>
-              {boardGame.description}
+              <span className="tag">Languages Spoken: </span>
+              {member.languages}
             </p>
           )}
         </div>

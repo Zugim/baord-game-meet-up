@@ -1,4 +1,4 @@
-.board-game-item {
+.member-item {
   background-color: rgba(187, 192, 198, 0.2);
   border-radius: 0.5rem;
   overflow: hidden;
@@ -7,7 +7,7 @@
   box-shadow: var(--focus-shadow);
 }
 
-.board-game-title {
+.member-name {
   background-color: var(--dark-green);
   color: var(--white);
   padding: 0.2rem 1rem;
@@ -15,31 +15,31 @@
   cursor: pointer;
 }
 
-.dropdown-hint {
+.member-item .dropdown-hint {
   display: flex;
   justify-content: center;
   font-size: 0.8rem;
   cursor: pointer;
 }
 
-.dropdown-hint svg path {
+.member-item .dropdown-hint svg path {
   color: var(--dark-green);
 }
 
-.board-game-title:hover {
+.member-name:hover {
   background-color: var(--light-green);
   color: var(--dark-green);
 }
 
-.board-game-title:hover h3 {
+.member-name:hover h3 {
   color: var(--dark-green);
 }
 
-.board-game-title h3 {
+.member-name h3 {
   color: var(--white);
   font-weight: 500;
 }
 
-.board-game-details {
+.member-details {
   padding: 0.5rem 1rem;
 }

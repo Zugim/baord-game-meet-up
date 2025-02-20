@@ -6,8 +6,6 @@
   padding: 1rem;
   background-color: var(--white);
   border-radius: 0.5rem;
-}
-
-.add-new-game-modal h2 {
-  width: 400px;
+  max-height: 650px;
+  overflow-y: auto;
 }

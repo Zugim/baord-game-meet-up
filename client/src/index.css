@@ -3,7 +3,7 @@
   --logo-font: 600 2rem "Borel", serif;
   --header-font: oblique 900 2.5rem "Lato", serif;
   --sub-header-font: 600 1.8rem "Hind Vadodara", serif;
-  --body-font: 350 1.1rem / 1.5 "Frank Ruhl Libre", serif;
+  --body-font: 400 1.1rem / 1.5 "Frank Ruhl Libre", serif;
   --button-font: 500 0.95rem "Hind Vadodara", serif;
   --label-font: 600 1rem "Hind Vadodara", serif;
   --input-font: 400 0.95rem "Hind Vadodara", serif;
@@ -13,6 +13,7 @@
   --black: #333a3f;
   --light-green: #e3eeae;
   --dark-green: #27667b;
+  --dark-green-light: #27667b97;
   --dark-blue: #143d60;
   --light-blue: #cfecf0;
   --grey-blue: #728aa0;
@@ -34,17 +35,16 @@
 h1 {
   margin-bottom: 0.4rem;
   font: var(--header-font);
-  color: var(--dark-blue);
+  color: var(--dark-green);
 }
 
 h2 {
   margin-bottom: 0.6rem;
   font: var(--sub-header-font);
-  color: var(--grey-blue);
+  color: var(--dark-green-light);
 }
 
 p {
-  margin-bottom: 0.8rem;
   font: var(--body-font);
 }
 
@@ -56,14 +56,21 @@ p {
   font-style: normal;
 }
 
+.tag {
+  color: var(--dark-green-light);
+  font: var(--label-font);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
 button {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 35px;
   padding: 0.4rem 1rem;
-  background-color: var(--dark-blue);
-  border: 2px solid var(--dark-blue);
+  background-color: var(--dark-green);
+  border: 2px solid var(--dark-green);
   border-radius: 100vh;
   font: var(--button-font);
   color: var(--white);
@@ -72,8 +79,8 @@ button {
 
 button:hover,
 button:focus {
-  background-color: var(--light-blue);
-  color: var(--dark-blue);
+  background-color: var(--light-green);
+  color: var(--dark-green);
 }
 
 button:focus {
@@ -99,7 +106,7 @@ button:focus {
 .pop-btn:hover,
 .pop-btn:hover {
   background-color: #e8c8f2;
-  color: var(--dark-blue);
+  color: var(--dark-green);
 }
 
 .pop-text {
@@ -117,7 +124,8 @@ label {
   font: var(--label-font);
 }
 
-input {
+input,
+textarea {
   height: 35px;
   margin-bottom: 0.5rem;
   padding-left: 0.8rem;
@@ -130,9 +138,15 @@ input + button {
   margin-top: 1rem;
 }
 
-input:focus {
+input:focus,
+textarea:focus {
   outline: none;
   box-shadow: var(--focus-shadow);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
 }
 
 .small-page {

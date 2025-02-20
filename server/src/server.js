@@ -263,18 +263,10 @@ app.get("/api/meeting/:id/board_game", async (req, res) => {
   }
 });
 
-// add a game to a meetings board game library <------ TODO
+// add a game to a meetings board game library
 app.post("/api/meeting/:id/board_game/add", async (req, res) => {
   try {
     const meetingId = Number(req.params.id);
-
-    // TODO make it so can only add games from own collection
-    // const boardGameId = await knex("board_games").returning("id").insert({
-    //   name: req.body.name,
-    //   primary_mechanic: req.body.primary_mechanic,
-    //   theme: req.body.theme,
-    //   description: req.body.description,
-    // });
 
     await knex("meeting_board_game").insert({
       meeting_id: meetingId,

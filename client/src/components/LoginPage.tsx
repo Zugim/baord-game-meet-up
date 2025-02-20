@@ -51,7 +51,9 @@ export default function LoginPage() {
             name="password"
             placeholder="Keep it a secret"
           />
-          <button type="submit">Login</button>
+          <button className="pop-btn" type="submit">
+            Submit
+          </button>
         </form>
       </main>
       <Footer />

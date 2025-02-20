@@ -25,7 +25,7 @@ export default function Header({ currentUser }: HeaderProps) {
           <>
             {location.pathname !== "/meeting/create" && (
               <NavLink to="/meeting/create" className="btn-link">
-                <button className="pop-btn">Create meeting</button>
+                <button className="pop-btn">Create A Meetup</button>
               </NavLink>
             )}
             {location.pathname !== "/user" && (

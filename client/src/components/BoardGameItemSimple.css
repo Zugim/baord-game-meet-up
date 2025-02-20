@@ -1,10 +1,18 @@
 .board-game-item-simple h3 {
   cursor: pointer;
-  padding: 0.5rem 1rem;
-  background-color: var(--dark-green);
+  padding: 0.3rem 1rem;
+  background-color: #e8c8f2;
   color: var(--white);
-  width: 100%;
   font: var(--sub-header-font);
   font-size: 1.2rem;
   border-radius: 0.5rem;
+  text-align: center;
+  box-shadow: var(--focus-shadow);
+  border: 2px solid var(--highlight);
+  color: var(--dark-green);
+}
+
+.board-game-item-simple h3:hover {
+  color: var(--white);
+  background-color: var(--highlight);
 }

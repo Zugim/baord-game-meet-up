@@ -25,7 +25,7 @@ export default function AddGameToCollectionModal({
 }: AddGameToCollectionModalProps) {
   return (
     <div className="add-new-game-modal">
-      <h2>Add a New Game</h2>
+      <h1>Add A New Game</h1>
       <form
         action={async (formData) => {
           await addGameToCollection(formData, currentUser?.id);
@@ -43,13 +43,11 @@ export default function AddGameToCollectionModal({
         <input type="text" name="theme" placeholder="Sci-fi" />
 
         <label htmlFor="description">Description</label>
-        <input
-          type="text"
-          name="description"
-          placeholder="What kind of game is it..."
-        />
+        <textarea name="description" placeholder="What kind of game is it..." />
 
-        <button type="submit">Add new game</button>
+        <button className="pop-btn" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

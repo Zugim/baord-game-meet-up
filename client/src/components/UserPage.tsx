@@ -47,16 +47,21 @@ export default function UserPage() {
         <Modal currentModal={currentModal} setCurrentModal={setCurrentModal} />
       )}
       <Header currentUser={currentUser} />
-      <main>
-        <h1>Hello {currentUser?.username}...</h1>
-        <p>
-          <span>Location: </span>
-          {currentUser?.city}
-        </p>
-        <p>
-          <span>Languages Spoken: </span>
-          {currentUser?.languages}
-        </p>
+      <main className="user">
+        <div className="user-details">
+          <h1>
+            Hello {currentUser?.username}
+            <span className="pop-text">...</span>
+          </h1>
+          <p>
+            <span className="tag">Location: </span>
+            {currentUser?.city}
+          </p>
+          <p>
+            <span className="tag">Languages Spoken: </span>
+            {currentUser?.languages}
+          </p>
+        </div>
         <h2>Your Collection</h2>
         {collection?.map((boardGame) => (
           <BoardGameItem key={boardGame.id} boardGame={boardGame} />
@@ -74,7 +79,7 @@ export default function UserPage() {
               )
             }
           >
-            Add new game
+            Add A New Game
           </button>
           <button
             onClick={async () => {

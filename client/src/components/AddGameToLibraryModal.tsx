@@ -25,8 +25,8 @@ export default function AddGameToLibraryModal({
   const id = Number(params.id);
 
   return (
-    <div className="add-new-game-modal">
-      <h2>Add a New Game</h2>
+    <div className="add-new-game-modal meeting">
+      <h1>Add A New Game</h1>
       {collection?.map((boardGame) => (
         <BoardGameItemSimple
           key={boardGame.id}
